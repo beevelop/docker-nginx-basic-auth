@@ -1,0 +1,36 @@
+[![Travis](https://shields.beevelop.com/travis/beevelop/docker-nginx-basic-auth.svg?style=flat-square)](https://travis-ci.org/beevelop/docker-nginx-basic-auth)
+[![Docker Pulls](https://shields.beevelop.com/docker/pulls/beevelop/nginx-basic-auth.svg?style=flat-square)](https://links.beevelop.com/d-nginx-basic-auth)
+[![ImageLayers Size](https://shields.beevelop.com/imagelayers/image-size/beevelop/nginx-basic-auth/latest.svg?style=flat-square)](https://imagelayers.io/?images=beevelop/nginx-basic-auth:latest)
+[![ImageLayers Layers](https://shields.beevelop.com/imagelayers/layers/beevelop/nginx-basic-auth/latest.svg?style=flat-square)](https://imagelayers.io/?images=beevelop/nginx-basic-auth:latest)
+![Badges](https://shields.beevelop.com/badge/badges-6-brightgreen.svg?style=flat-square)
+[![Beevelop](https://links.beevelop.com/honey-badge)](https://beevelop.com)
+
+# nginx-basic-auth
+----
+> Simple Docker image to provide basic authentication for a single other container.
+
+## Quickstart
+```
+docker run -d --name web dockercloud/hello-world
+docker run -d -p 80:80 --link web:web --name auth beevelop/nginx-basic-auth
+```
+
+Try accessing and logging in with username `foo` and password `bar`.
+
+## Advanced
+```
+docker run -d -e HTPASSWD='' -e FORWARD_PORT=1337 --link web:web -p 8080:80 --name auth beevelop/nginx-basic-auth
+```
+> Use single quotes to prevent unwanted interpretation of `$` signs!
+
+## Configuration
+- `HTPASSWD` (default: `foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.`): Will be written on launch to the .htpasswd file (non-persistent)
+- `FORWARD_PORT` (default: `80`): Port of the source container that should be forwarded
+
+## Troubleshooting
+```
+nginx: [emerg] host not found in upstream "web" in /etc/nginx/conf.d/auth.conf:80
+```
+- You need to link the container as `web` (`--link foobar:web`)
+---
+- SSL is unsupported ATM, but might be available in the near future. For now it might be a suitable solution to use another reverse proxy (e.g. `jwilder/nginx-proxy`) that acts as a central gateway. You just need to configure the `VIRTUAL_HOST` env and disable port forwarding.
