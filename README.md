@@ -33,6 +33,15 @@ docker run -d \
 - `FORWARD_PORT` (default: `80`): Port of the **source** container that should be forwarded
 > The container does not need any volumes to be mounted! Nonetheless you will find all interesting files at `/etc/nginx/*`.
 
+## Multiple Users
+Multiple Users are possible by separating the users by newline. To pass the newlines properly you need to use Shell Quoting (like `$'foo\nbar'`):
+```
+docker run -d --link web:web --name auth \
+           -e HTPASSWD=$'foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.\ntest:$apr1$LKkW8P4Y$P1X/r2YyaexhVL1LzZAQm.' \
+           beevelop/nginx-basic-auth
+```
+results in 2 users (`foo:bar` and `test:test`).
+
 ## Troubleshooting
 ```
 nginx: [emerg] host not found in upstream "web" in /etc/nginx/conf.d/auth.conf:80
