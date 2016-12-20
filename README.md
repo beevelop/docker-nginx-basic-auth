@@ -1,7 +1,7 @@
 [![Travis](https://shields.beevelop.com/travis/beevelop/docker-nginx-basic-auth.svg?style=flat-square)](https://travis-ci.org/beevelop/docker-nginx-basic-auth)
-[![Docker Pulls](https://shields.beevelop.com/docker/pulls/beevelop/nginx-basic-auth.svg?style=flat-square)](https://links.beevelop.com/d-nginx-basic-auth)
-[![ImageLayers Size](https://shields.beevelop.com/imagelayers/image-size/beevelop/nginx-basic-auth/latest.svg?style=flat-square)](https://imagelayers.io/?images=beevelop/nginx-basic-auth:latest)
-[![ImageLayers Layers](https://shields.beevelop.com/imagelayers/layers/beevelop/nginx-basic-auth/latest.svg?style=flat-square)](https://imagelayers.io/?images=beevelop/nginx-basic-auth:latest)
+[![Pulls](https://shields.beevelop.com/docker/pulls/beevelop/nginx-basic-auth.svg?style=flat-square)](https://links.beevelop.com/d-nginx-basic-auth)
+[![Size](https://shields.beevelop.com/docker/image/size/beevelop/nginx-basic-auth/latest.svg?style=flat-square)](https://links.beevelop.com/d-nginx-basic-auth)
+[![Layers](https://shields.beevelop.com/docker/image/layers/beevelop/nginx-basic-auth/latest.svg?style=flat-square)](https://links.beevelop.com/d-nginx-basic-auth)
 ![Badges](https://shields.beevelop.com/badge/badges-6-brightgreen.svg?style=flat-square)
 [![Beevelop](https://links.beevelop.com/honey-badge)](https://beevelop.com)
 
