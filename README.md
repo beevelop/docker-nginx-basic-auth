@@ -42,6 +42,16 @@ docker run -d --link web:web --name auth \
 ```
 results in 2 users (`foo:bar` and `test:test`).
 
+## Disable authentication
+You can skip basic authentication setting AUTHENTICATED to `false`:
+```
+docker run -d --link web:web --name auth \
+           -e AUTHENTICATED=false \
+           beevelop/nginx-basic-auth
+```
+
+Warning: when `AUTHENTICATED=false`, `HTPASSWD` variable will be ignored.
+
 ## Troubleshooting
 ```
 nginx: [emerg] host not found in upstream "web" in /etc/nginx/conf.d/auth.conf:80
