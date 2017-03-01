@@ -8,6 +8,8 @@ WORKDIR /opt
 
 RUN apk add --no-cache gettext
 
-COPY auth.conf auth.htpasswd launch.sh ./
+COPY auth.conf healthcheck.conf auth.htpasswd launch.sh ./
+
+HEALTHCHECK CMD wget -q http://localhost:80/ || exit 1
 
 CMD ["./launch.sh"]
