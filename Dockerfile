@@ -3,7 +3,8 @@ FROM nginx:alpine
 ENV HTPASSWD='foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.' \
     PORT=80 \
     FORWARD_PORT=80 \
-    FORWARD_HOST=web
+    FORWARD_HOST=web \
+    REALM="Restricted"
 
 WORKDIR /opt
 
