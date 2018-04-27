@@ -31,6 +31,7 @@ docker run -d \
 ## Configuration
 - `HTPASSWD` (default: `foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.`): Will be written to the .htpasswd file on launch (non-persistent)
 - `FORWARD_PORT` (default: `80`): Port of the **source** container that should be forwarded
+- `REALM` (default: `"Restricted"`): Realm authentication parameter, this is also the message that will appear in the password dialog. The special value `off` disables the authentication.
 > The container does not need any volumes to be mounted! Nonetheless you will find all interesting files at `/etc/nginx/*`.
 
 ## Multiple Users
