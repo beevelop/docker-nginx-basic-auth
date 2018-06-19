@@ -10,8 +10,12 @@ if [ "$RAW_CREDENTIALS" = 1 ]; then
   )
 fi
 
+export NAMESERVER=$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | tr '\n' ' ')
+
 rm /etc/nginx/conf.d/default.conf || :
-envsubst < auth.conf > /etc/nginx/conf.d/auth.conf
+
+envsubst '$NAMESERVER,$FORWARD_HOST,$FORWARD_PORT,$PROXY_READ_TIMEOUT' \
+  < auth.conf > /etc/nginx/conf.d/auth.conf
 envsubst < auth.htpasswd > /etc/nginx/auth.htpasswd
 
 nginx -g "daemon off;"
