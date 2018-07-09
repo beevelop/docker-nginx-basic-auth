@@ -58,6 +58,11 @@ docker run -d --link web:web --name auth \
            beevelop/nginx-basic-auth
 ```
 
+## Passing user name
+
+The authenticated user name is passed to the revproxied server in the header
+`"X-Forwarded-User"`.
+
 ## Troubleshooting
 ```
 nginx: [emerg] host not found in upstream "web" in /etc/nginx/conf.d/auth.conf:80
