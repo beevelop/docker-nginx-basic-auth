@@ -2,12 +2,12 @@ version: '3.1'
 
 # run with docker-compose:
 #
-#     docker-compose -f docker-cloud.yml up
+#     docker-compose -f docker-stack.yml up
 
 # run with docker swarm:
 #
 #     docker swarm init
-#     docker stack deploy --compose-file docker-cloud.yml authdemo
+#     docker stack deploy --compose-file docker-stack.yml authdemo
 
 volumes:
   web-data:
