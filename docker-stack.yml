@@ -1,0 +1,35 @@
+version: '3.1'
+
+# run with docker-compose:
+#
+#     docker-compose -f docker-stack.yml up
+
+# run with docker swarm:
+#
+#     docker swarm init
+#     docker stack deploy --compose-file docker-stack.yml authdemo
+
+volumes:
+  web-data:
+
+services:
+
+  web:
+    image: 'nginx'
+    ## instead of an exposed port, use FORWARD_PORT in auth, below
+    # ports:
+    #   - '80:80'
+    volumes:
+      - web-data:/usr/share/nginx/html:ro
+  
+  auth:
+    image: 'beevelop/nginx-basic-auth'
+    ports:
+      - '8080:80'
+    environment:
+      - PORT=80
+      - FORWARD_HOST=web
+      - FORWARD_PORT=80
+      ## escape $ with $$ in Docker yml due to variable expansion
+      ## example user/pass generated with htpasswd is foo:bar
+      - HTPASSWD=foo:$$apr1$$odHl5EJN$$KbxMfo86Qdve2FH4owePn.
