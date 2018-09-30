@@ -10,4 +10,6 @@ RUN apk add --no-cache gettext
 
 COPY auth.conf auth.htpasswd launch.sh ./
 
-CMD ["./launch.sh"]
+ENTRYPOINT ["./launch.sh"]
+
+CMD ["nginx", "-g", "daemon off;"]
