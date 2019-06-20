@@ -31,6 +31,8 @@ docker run -d \
 ## Configuration
 - `HTPASSWD` (default: `foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.`): Will be written to the .htpasswd file on launch (non-persistent)
 - `FORWARD_PORT` (default: `80`): Port of the **source** container that should be forwarded
+- `FORWARD_HOST` (default: `web`): Host of the **source** container that should be forwarded
+- `PROXY_READ_TIMEOUT` (default: `900`): Timeout of the backend response
 > The container does not need any volumes to be mounted! Nonetheless you will find all interesting files at `/etc/nginx/*`.
 
 ## Multiple Users
@@ -41,6 +43,20 @@ docker run -d --link web:web --name auth \
            beevelop/nginx-basic-auth
 ```
 results in 2 users (`foo:bar` and `test:test`).
+
+## Raw Credentials
+If passing the contents of the HTPASSWD file is not convenient for you (because
+you need to perform additional step of generating it via `htpasswd -nb foo
+bar`), you can pass the credentials in a raw form and the contents of HTPASSWD
+variable will be generated for you. The `RAW_CREDENTIALS=1` must be set to
+enable this feature.
+
+```
+docker run -d --link web:web --name auth \
+           -e HTPASSWD=$'foo:bar\ntest:test' \
+           -e RAW_CREDENTIALS=1 \
+           beevelop/nginx-basic-auth
+```
 
 ## Troubleshooting
 ```
