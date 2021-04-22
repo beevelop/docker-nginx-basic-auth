@@ -2,6 +2,6 @@
 
 rm /etc/nginx/conf.d/default.conf || :
 envsubst < auth.conf > /etc/nginx/conf.d/auth.conf
-envsubst < auth.htpasswd > /etc/nginx/auth.htpasswd
+htpasswd -bc /etc/nginx/auth.htpasswd $BASIC_USERNAME $BASIC_PASSWORD
 
 nginx -g "daemon off;"
