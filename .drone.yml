@@ -1,0 +1,20 @@
+kind: pipeline
+type: docker
+name: build image
+
+trigger:
+  branch:
+    - dev
+  event:
+    - push
+    - tag
+
+steps:
+- name: build
+  image: plugins/docker
+  settings:
+    username: chrisguoado
+    password:
+      from_secret: docker_passwd
+    repo: chrisguoado/nginx-basic-auth
+    auto_tag: true
