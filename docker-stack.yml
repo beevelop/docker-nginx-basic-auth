@@ -13,7 +13,6 @@ services:
   auth:
     image: 'chrisguoado/nginx-basic-auth'
     environment:
-      - PORT=80
       - LISTEN_PORT=8888
       - FORWARD_HOST=web
       - FORWARD_PORT=80
