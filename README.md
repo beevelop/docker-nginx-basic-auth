@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/beevelop/docker-nginx-basic-auth/Docker%20Image?style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/beevelop/docker-nginx-basic-auth/docker.yml?style=for-the-badge)
 ![Docker Pulls](https://img.shields.io/docker/pulls/beevelop/nginx-basic-auth.svg?style=for-the-badge)
 ![Docker Stars](https://img.shields.io/docker/stars/beevelop/nginx-basic-auth?style=for-the-badge)
 ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/beevelop/nginx-basic-auth/latest?style=for-the-badge)
