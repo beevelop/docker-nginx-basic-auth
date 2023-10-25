@@ -27,8 +27,9 @@ Try accessing and logging in with username `foo` and password `bar`.
 
 ```bash
 docker run -d \
-           -e HTPASSWD='foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.' \
            -e FORWARD_PORT=1337 \
+           -e BASIC_USERNAME=myuser \
+           -e BASIC_PASSWORD=passw0rd123
            --link web:web -p 8080:80 \
            --name auth \
            beevelop/nginx-basic-auth
@@ -54,6 +55,66 @@ docker run -d --link web:web --name auth \
 ```
 
 results in 2 users (`foo:bar` and `test:test`).
+
+## K8s
+Create secret
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+    name: prometheus-auth
+type: Opaque
+data:
+    username: bXl1c2Vy #base64 username
+    password: cGFzc3cwcmQxMjM= #base64 password
+
+```
+
+Create your deployment
+
+```
+...
+
+        - name: nginx
+          image: beevelop/nginx-basic-auth
+          securityContext:
+            runAsUser: 0
+            runAsNonRoot: false
+          env:
+          - name: BASIC_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: auth
+                key: username
+          - name: BASIC_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: auth
+                key: password
+          - name: FORWARD_PORT
+            value: "9090"
+          - name: FORWARD_HOST
+            value: "localhost"
+          ports:
+            - containerPort: 80
+        - name: prometheus-server
+          image: "prom/prometheus:v2.13.1"
+          imagePullPolicy: "IfNotPresent"
+          args:
+            - --storage.tsdb.retention.time=120d
+            - --config.file=/etc/config/prometheus.yml
+            - --storage.tsdb.path=/data
+            - --web.console.libraries=/etc/prometheus/console_libraries
+            - --web.console.templates=/etc/prometheus/consoles
+            - --web.enable-lifecycle
+            - --web.external-url=https://host.domain.com/prometheus
+            - --web.route-prefix=/prometheus
+          ports:
+            - containerPort: 9090
+...
+
+```
 
 ## Troubleshooting
 
