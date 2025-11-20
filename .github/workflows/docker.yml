@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref || github.ref }}
       - name: Set imageName based on the repository name
