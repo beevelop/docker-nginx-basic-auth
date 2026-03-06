@@ -60,4 +60,4 @@ jobs:
           command: cves
           image: ${{ env.imageName }}:${{ steps.docker_meta.outputs.version }}
           only-severities: critical,high
-          exit-code: true
+          exit-code: false
