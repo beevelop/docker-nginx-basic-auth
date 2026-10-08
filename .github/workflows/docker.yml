@@ -55,7 +55,7 @@ jobs:
       - name: Docker Scout
         id: docker-scout-cves
         if: ${{ github.event_name != 'pull_request' }}
-        uses: docker/scout-action@v1.24.0
+        uses: docker/scout-action@v1.26.0
         with:
           command: cves
           image: ${{ env.imageName }}:${{ steps.docker_meta.outputs.version }}
